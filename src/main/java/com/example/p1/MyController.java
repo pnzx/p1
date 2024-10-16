@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.fasterxml.jackson.annotation.JsonCreator.Mode;
+
 @Controller
 public class MyController {
 
@@ -61,17 +63,59 @@ public class MyController {
 		return "ex02Answer";
 	}
 
-	@Getmapping("/ex03")
-	public String ex03() {
-		return "ex03";
-	}
-
 	@PostMapping("/ex03/answer")
 	public String ex03Answer(@RequestParam("mname") String mname,
 			@RequestParam("color") String color, Model mo) {
 		mo.addAttribute(mname, mname);
 		mo.addAttribute(color, color);
 		return "ex03Answer";
+	}
+
+	@GetMapping("/bread")
+	public String bread() {
+		return "bread";
+	}
+
+	@PostMapping("/bread/answer")
+	public String breadAnswer(@RequestParam("bread") String bread,
+			@RequestParam("price") int price,
+			@RequestParam("quantity") int quantity, Model mo){
+				mo.addAttribute("bread", bread);
+				mo.addAttribute("quantity", quantity);
+				int total=0;
+				total=quantity*price;
+				mo.addAttribute("total", total);
+				return "breadAnswer";
+					}
+	
+	@GetMapping("/q06")
+	public String q06() {
+		return "q06";
+	}
+	
+	@GetMapping("/q06/a")
+	public String a() {
+		return "a";
+	}
+	
+	@GetMapping("/q06/b")
+	public String b() {
+		return "b";
+	}
+	
+	@PostMapping("/q06/aa")
+	public String aanswer(@RequestParam("first") String first,
+			@RequestParam("secend") String secend, Model mo) {
+		mo.addAttribute("first", first);
+		mo.addAttribute("secend", secend);
+		return "aanswer";
+	}
+	
+	@PostMapping("/q06/bb")
+	public String banswer(@RequestParam("job") String job, Model mo) {
+		mo.addAttribute("job", job);
+
+		return "banswer";
 	}
 
 }
